@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 
+import Sky from '../models/Sky';
 import Island from '../models/Island';
 
   {/* <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
@@ -19,10 +20,10 @@ const Home = () => {
     } else {
       screenScale = [1, 1, 1];
     }
-    return [screenScale, screenPosition]
+    return [screenScale, screenPosition, rotation];
   }
 
-  const [islandScale, islandPosition] = adjustIslandForScreenSize();
+  const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
 
   return (
     <section className="w-full h-screen relative">
@@ -31,15 +32,18 @@ const Home = () => {
         camera={{ near: 0.1, far: 1000 }}
       >
         <Suspense fallback={<Loader />}>
-          <directionalLight />
-          <ambientLight />
+          <directionalLight position={[1, 3, 1]} intensity={2} />
+          <ambientLight intensity={0.1}/>
           <pointLight />
           <spotLight />
-          <hemisphereLight />
-
+          <hemisphereLight skyColor="#b1e1ff" groundColor="#000000" intensity={1.1}/>
+          
+          /* make sun with my face like teletubby's */
+          <Sky />
           <Island 
             position={islandPosition}
             scale={islandScale}
+            rotation={islandRotation}
           />
         </Suspense>
       </Canvas>
