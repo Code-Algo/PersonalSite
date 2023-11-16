@@ -3,6 +3,8 @@ import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 
 import Sky from '../models/Sky';
+import Bird from '../models/Bird';
+import Plane from '../models/Plane';
 import Island from '../models/Island';
 
   {/* <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
@@ -39,12 +41,14 @@ const Home = () => {
           <hemisphereLight skyColor="#b1e1ff" groundColor="#000000" intensity={1.1}/>
           
           /* make sun with my face like teletubby's */
+          <Bird />
           <Sky />
           <Island 
             position={islandPosition}
             scale={islandScale}
             rotation={islandRotation}
           />
+          <Plane />
         </Suspense>
       </Canvas>
     </section>
