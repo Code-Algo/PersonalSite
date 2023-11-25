@@ -15,9 +15,27 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    emailjs.sendForm()
-    service_myns0vd,
-    template_sa495xt
+    emailjs.send(
+      import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+      {
+        from_name: form.name,
+        to_name: "Alex",
+        from_email: form.email,
+        to_email: 'alexanderacollins@gmail.com',
+        message: form.message
+      },
+      import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+    ).then(() => {
+      setIsLoading(false);
+      // TODO: Show success message
+      // TODO: Hide Alert
+      setForm({ name: '', email: '', message: ''});
+    }).catch((error) => {
+      setIsLoading(false);
+      console.log(error);
+      // TODO: Show error
+    })
   };
 
   return (
